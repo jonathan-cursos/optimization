@@ -2,9 +2,9 @@ import React, { memo, useEffect } from 'react'
 import Item from './Item'
 
 const List = memo(({ users }) => {
-  useEffect(() => {
-    console.log('Reendering List')
-  })
+  // useEffect(() => {
+  //   console.log('Reendering List')
+  // })
   return (
     <>
       <ul>
