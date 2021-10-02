@@ -9,7 +9,7 @@ Optimizaciones
 -Tenemos un effect en cada componente que imprime en consola cada vez que
   los elementos se renderizan.
 
-memo()
+React.memo()
   -Cada vez que realizamos un cambio en el input (está en el App) vemos
     que los demás componentes tambien se están volviendo a renderizar.
   -Podemos ver esto como un problema, pero casi siempre vamos a querer
@@ -25,3 +25,11 @@ memo()
   -Sí enviamos el input, vemos que se renderizán los 3, esto es correcto,
     pero en Item se están renderizando de nuevo los que ya teniamos.
   -Para solucionar esto, a Item tambien debemos pasarle el memo.
+  -El problema con la memorización es que puede ser más pesado que reenderizar el componente
+    de nuevo, quitandole la utilidad.
+  -Cuando se hace memorización se hacen varias comprobaciones internas de React, que hacen
+    que sea incluso más pesada que la renderización.
+  -La regla general sería no usarlo, y sí lo hacemos, será cuando nos demos cuenta que la
+    renderización se torna lenta. Por ejemplo, en listas con muchos componentes.
+  -Otro caso es cuando estemos haciendo llamados a una API, pues estos normalmente tienen
+    muchos datos.
