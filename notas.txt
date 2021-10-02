@@ -1,0 +1,27 @@
+Optimizaciones
+
+-Tenemos el componente App que está retornando la lista, y a la lista
+  le pasamos como props una lista de usuarios.
+-Mapeamos la lista de usuarios, y por cada uno retornamos el componente
+  Item, le pasamos la información de cada usuario por props.
+-Tenemos un input y un button, en el componente App y cuando hagamos click 
+  en el boton, cambia la lista de usuarios.
+-Tenemos un effect en cada componente que imprime en consola cada vez que
+  los elementos se renderizan.
+
+memo()
+  -Cada vez que realizamos un cambio en el input (está en el App) vemos
+    que los demás componentes tambien se están volviendo a renderizar.
+  -Podemos ver esto como un problema, pero casi siempre vamos a querer
+    que esto sea deseable.
+  -Para que esto no pase, podemos importar el metodo memo() de react.
+  -A la hora de crear la constante del componente, ejecutamos memo() y
+    dentro irá la función que será este componente.
+  -Este componente ahora solo se renderiza sí el valor de alguna de sus
+    props cambió.
+  -Sí hacemos esto con Lista, no se renderizará al cambiar el valor del
+    input, pues ninguna de sus props está cambiando, tampoco lo hará
+    Item, pues sus props tampoco cambian mediante Lista.
+  -Sí enviamos el input, vemos que se renderizán los 3, esto es correcto,
+    pero en Item se están renderizando de nuevo los que ya teniamos.
+  -Para solucionar esto, a Item tambien debemos pasarle el memo.
