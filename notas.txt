@@ -1,25 +1,21 @@
-useMemo()
+useCallback()
 
--En react, regularmente para hacer un filtro, al componente que sea Lista le pasamos
-  como lista que va a renderizar una variable.
--Esta variable tendrá como valor el filtro completo.
--Haciendo esto, cada vez que cambiemos los valores el input, como está renderizando todo
-  de nuevo, hará que se filtren los valores, con solo cambiar el input, sin un boton.
--Para dar utilidad al boton de busqueda, creamos un estado, y este es el que validamos 
-  dentro del includes. En el click del boton, colocamos ese estado, dandole como valor lo
-  que está en el input.
--Pero esto tiene el problema de que la función del filtro se sigue ejecutando, aunque no 
-  filtra nada porque ahora validamos lo que está en el estado.
--Para corregir esto existe useMemo.
+-Sí en el app declaramos un handleDelete (por ejemplo), y lo pasamos a Lista, y de aquí a
+  Item, para que cada item tenga un boton que ejecute este handle, vamos a ver, con los 
+  mensajes de la 1er clase, como se renderiza todos los componentes cada vez que cambiamos
+  el input.
+-La función principal de useCallback es la de guardar definiciones de funciones.
 
-useMemo()
-  -Hara que una función se ejecute solamente sí alguno de los valores a validar cambia.
-  -Su sintaxis es similar al useEffect, donde los valores a validar se colocan en un array
-    en el segundo parametro.
-  -La función del use memo lo que debe retornar es lo que hacia anteriormente la función del
-    filtro, pero no llamar la función en sí, sino que aquí se define desde el inicio.
-  -Esto hará que dicha función se ejecute siempre que los valores del 2do parametro cambie
-    alguno su valor.
-  -La función que será el proceso siempre debe retornar algo.
+-Esto es porque cada vez que renderizamos la app principal, react guarda este handle 
+  en una dirección de memoria distinta, entonces entiende que este handle es diferente 
+  (aunque sea igual).
+-Esto incluso aunque Item este siendo memorizado.
+-La estructura del useCallback es similar a la anterior, pero no necesariamente la función
+  debe retornar algo.
+-Como segundo parametro igualmente escuchamos los valores que cambiarán para definir de 
+  nuevo la función, y se redefine solo sí esos valores cambian.
 
--Su reestriccion de uso es la misma que con memo(), y tambien sus condiciones.
+-Sí tenemos una función que utilice cualquier cosa del estado, y esta está siendo llamada
+  dentro de un useEffect, este tiene que escuchar la función dentro de su 2do parametro, y
+  esa función tendremos que colocarla dentro de un useCallback, que escuche dentro de su
+  segundo parametro el elementod el estado que esta necesitando la función.

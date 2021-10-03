@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useCallback } from 'react'
 import List from './List'
 
 const initialUsers = [
@@ -19,6 +19,17 @@ function App() {
     setUsers([...users, { id: Date.now(), name: text }])
   }
 
+  // const handleDelete = (userId) => {
+  //   setUsers(users.filter((user) => user.id !== userId))
+  // }
+
+  const handleDelete = useCallback(
+    (userId) => {
+      setUsers(users.filter((user) => user.id !== userId))
+    },
+    [users]
+  )
+
   // const filteredUsers = users.filter((user) => {
   //   console.log('filtered process')
   //   return user.name.toLowerCase().includes(search.toLowerCase())
@@ -27,14 +38,14 @@ function App() {
   const filteredUsers = useMemo(
     () =>
       users.filter((user) => {
-        console.log('filtered process')
+        // console.log('filtered process')
         return user.name.toLowerCase().includes(search.toLowerCase())
       }),
     [search, users]
   )
 
   const handleSearch = () => {
-    console.log('search')
+    // console.log('search')
     setSearch(text)
   }
 
@@ -52,7 +63,7 @@ function App() {
       <button type='button' onClick={handleClick}>
         Agregar
       </button>
-      <List users={filteredUsers} />
+      <List users={filteredUsers} handleDelete={handleDelete} />
     </div>
   )
 }
