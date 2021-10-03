@@ -1,21 +1,18 @@
-useCallback()
+Resumen
 
--Sí en el app declaramos un handleDelete (por ejemplo), y lo pasamos a Lista, y de aquí a
-  Item, para que cada item tenga un boton que ejecute este handle, vamos a ver, con los 
-  mensajes de la 1er clase, como se renderiza todos los componentes cada vez que cambiamos
-  el input.
--La función principal de useCallback es la de guardar definiciones de funciones.
+memo:
+  -Memoriza un componente completo.
+  -Memoriza de nuevo al cambiar las props.
+  -Evita re-renders.
+  -Se llama de fijo cuando se hace llamados a una API
 
--Esto es porque cada vez que renderizamos la app principal, react guarda este handle 
-  en una dirección de memoria distinta, entonces entiende que este handle es diferente 
-  (aunque sea igual).
--Esto incluso aunque Item este siendo memorizado.
--La estructura del useCallback es similar a la anterior, pero no necesariamente la función
-  debe retornar algo.
--Como segundo parametro igualmente escuchamos los valores que cambiarán para definir de 
-  nuevo la función, y se redefine solo sí esos valores cambian.
+useMemo:
+  -Memoriza un valor calculado.
+  -Para propiedades computadas (como un filtro).
+  -Para procesos pesados.
 
--Sí tenemos una función que utilice cualquier cosa del estado, y esta está siendo llamada
-  dentro de un useEffect, este tiene que escuchar la función dentro de su 2do parametro, y
-  esa función tendremos que colocarla dentro de un useCallback, que escuche dentro de su
-  segundo parametro el elementod el estado que esta necesitando la función.
+useCallback:
+  -Memoriza una función para no redefinirla en cada render.
+  -Se usa siempre que se pase una función como dependencia de un efecto (del segundo param).
+  -Usarlo siempre que se pase una función por props a un componente que esté siendo 
+    memorizado.
